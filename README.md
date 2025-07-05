@@ -1,2 +1,2 @@
 # penguin-coin
-normal coin for learning blockchain
+Normal coin for learning blockchain
