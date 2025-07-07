@@ -5,8 +5,7 @@ import me.duynam.penguin_coin.util.CryptoUtils;
 
 public class BlockFactory {
 
-  public Block generateNextBlock(String blockData) {
-    final Block previousBlock = getLastestBlock();
+  public static Block generateNextBlock(Block previousBlock, String blockData) {
     if (previousBlock == null) {
       throw new IllegalStateException("Cannot generate next block without a previous block");
     }
@@ -24,7 +23,7 @@ public class BlockFactory {
         nextIndex, nextHash, previousHash, nextTimestamp, blockData, difficulty, nonce);
   }
 
-  public Block generateGenesisBlock() {
+  public static Block generateGenesisBlock() {
     final Long genesisIndex = 0L;
     final String genesisHash = "189d71748db1c1d623f24961f2df781a46c3d9373453b27d51e234529a430fed";
     final String previousHash = "0";
@@ -35,10 +34,5 @@ public class BlockFactory {
 
     return new Block(
         genesisIndex, genesisHash, previousHash, genesisTimestamp, genesisData, difficulty, nonce);
-  }
-
-  private Block getLastestBlock() {
-    // TODO: need to implement later
-    return null;
   }
 }
