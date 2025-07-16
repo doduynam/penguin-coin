@@ -1,15 +1,17 @@
 package me.duynam.penguin_coin.validator;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.duynam.penguin_coin.model.Block;
 import me.duynam.penguin_coin.util.CryptoUtils;
 import org.apache.commons.lang3.StringUtils;
 
 @Slf4j
-
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BlockValidator {
 
-  public static boolean isValidNewBlock(Block newBlock, Block previousBlock) {
+  public static boolean isValidBlock(Block newBlock, Block previousBlock) {
     if (previousBlock == null) {
       log.info("No previous block to validate against.");
       return false; // No previous block to compare against
@@ -33,7 +35,8 @@ public class BlockValidator {
 
     if (StringUtils.isBlank(newBlock.getHash())
         || StringUtils.equals(newBlock.getHash(), CryptoUtils.calculateHash(newBlock))) {
-      log.info("Invalid block hash: expected a non-empty hash that does not match the calculated hash.");
+      log.info(
+          "Invalid block hash: expected a non-empty hash that does not match the calculated hash.");
       return false;
     }
 
